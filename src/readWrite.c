@@ -7,15 +7,6 @@ int data = 0;
 void *writeFunc();
 void *readFunc();
 
-typedef struct shmObject{
-	pthread_mutex_t wrlock;
-	int m_iWriteIndex;
-	int m_iReadIndex;
-	int* addr;
-}shmObject;
-
-shmObject* shmO1;
-
 int main(void)
 {
 	init();
@@ -26,7 +17,7 @@ int main(void)
 	pthread_create(&wt, NULL, writeFunc, NULL);
 	pthread_create(&rt, NULL, readFunc, NULL);
 
-	poll((FILE*)stdin, 0, 1000 * 50);
+	poll(NULL, 0, 1000 * 50);
 }
 
 void *writeFunc()
@@ -50,7 +41,7 @@ void *readFunc()
 			continue;
 		}
 		printf("read : %d\n", iOutput);
-		poll(NULL, 0, 1000);
+		poll(NULL, 0, 10);
 	}
 }
 
@@ -65,7 +56,7 @@ int isEmpty()
 
 int isFull()
 {
-	if((iWriteIndex - iReadIndex + 201) * 201 == 200){
+	if((iWriteIndex - iReadIndex + 20) % 20 == 19){
 		return 1;
 	}else{
 		return 0;
@@ -81,7 +72,7 @@ void init()
 
 
 
-        if((shmid=shmget(key,(sizeof(int)*201)+sizeof(shmObject),IPC_CREAT|0666))==-1){
+        if((shmid=shmget(key,(sizeof(int)*20)+sizeof(shmObject),IPC_CREAT|0666))==-1){
                 printf("shmget failed\n");
                 exit(0);
         }
@@ -98,7 +89,7 @@ void init()
 	
 	//shared memory object init
 	//mutex init
-	pthread_mutex_init(&shmO1->wrlock, &shmatt1);
+	pthread_mutex_init(&shmO1->rwMutex, &shmatt1);
 	shmO1->m_iWriteIndex = 0;
 	shmO1->m_iReadIndex = 0;
 	shmO1->addr = shmO1 + sizeof(shmObject);
@@ -108,20 +99,25 @@ void init()
 
 int enqueue(int _input)
 {
+	pthread_mutex_lock(&shmO1->rwMutex);
 	if(isFull()){
+		pthread_mutex_unlock(&shmO1->rwMutex);
 		return -1;
 	}
-	Arr[iWriteIndex++] = _input;
+	pthread_mutex_unlock(&shmO1->rwMutex);
+	shmO1->addr[iWriteIndex++] = _input;
 	return 0;
 }
 
 int dequeue(int *retVal)
 {
+	pthread_mutex_lock(&shmO1->rwMutex);
 	if(isEmpty()){
+		pthread_mutex_unlock(&shmO1->rwMutex);
 		return -1;
 	}
-
-	*retVal = Arr[iReadIndex++];
+	pthread_mutex_unlock(&shmO1->rwMutex);
+	*retVal = shmO1->addr[iReadIndex++];
 	return 0;
 }
 

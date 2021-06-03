@@ -5,6 +5,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef struct shmObject{
+	pthread_mutex_t rwMutex;
+	int m_iWriteIndex;
+	int m_iReadIndex;
+	int* addr;
+}shmObject;
+
+shmObject* shmO1;
+
 int *Arr;
 
 int iReadIndex;
