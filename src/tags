@@ -1,0 +1,30 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+Arr	../libsrc/multiProcess.h	/^int *Arr;$/;"	v	typeref:typename:int *
+addr	../src/readWrite.c	/^	int* addr;$/;"	m	struct:shmObject	typeref:typename:int *	file:
+data	../src/readWrite.c	/^int data = 0;$/;"	v	typeref:typename:int
+dequeue	../src/readWrite.c	/^int dequeue(int *retVal)$/;"	f	typeref:typename:int
+enqueue	../src/readWrite.c	/^int enqueue(int _input)$/;"	f	typeref:typename:int
+iReadIndex	../libsrc/multiProcess.h	/^int iReadIndex;$/;"	v	typeref:typename:int
+iWriteIndex	../libsrc/multiProcess.h	/^int iWriteIndex;$/;"	v	typeref:typename:int
+init	../src/readWrite.c	/^void init()$/;"	f	typeref:typename:void
+init	../src/watch.c	/^void init()$/;"	f	typeref:typename:void
+isEmpty	../src/readWrite.c	/^int isEmpty()$/;"	f	typeref:typename:int
+isFull	../src/readWrite.c	/^int isFull()$/;"	f	typeref:typename:int
+key	../libsrc/multiProcess.h	/^key_t key;$/;"	v	typeref:typename:key_t
+m_iReadIndex	../src/readWrite.c	/^	int m_iReadIndex;$/;"	m	struct:shmObject	typeref:typename:int	file:
+m_iWriteIndex	../src/readWrite.c	/^	int m_iWriteIndex;$/;"	m	struct:shmObject	typeref:typename:int	file:
+main	../src/readWrite.c	/^int main(void)$/;"	f	typeref:typename:int
+main	../src/watch.c	/^int main(void){$/;"	f	typeref:typename:int
+readFunc	../src/readWrite.c	/^void *readFunc()$/;"	f	typeref:typename:void *
+rwMutex	../libsrc/multiProcess.h	/^pthread_mutex_t rwMutex;$/;"	v	typeref:typename:pthread_mutex_t
+shmObject	../src/readWrite.c	/^typedef struct shmObject{$/;"	s	file:
+shmObject	../src/readWrite.c	/^}shmObject;$/;"	t	typeref:struct:shmObject	file:
+showQ	../src/watch.c	/^void showQ()$/;"	f	typeref:typename:void
+writeFunc	../src/readWrite.c	/^void *writeFunc()$/;"	f	typeref:typename:void *
+wrlock	../src/readWrite.c	/^	pthread_mutex_t wrlock;$/;"	m	struct:shmObject	typeref:typename:pthread_mutex_t	file:
